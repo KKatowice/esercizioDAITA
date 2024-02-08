@@ -25,3 +25,5 @@ creazione = """CREATE TABLE creazione(
 execute_query(connection, artisti)
 execute_query(connection, opere)
 execute_query(connection, creazione)
+
+#PROVA
