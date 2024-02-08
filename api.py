@@ -1,32 +1,41 @@
-from flask import Flask #nome db: museo
-app = Flask(__name__)
+from flask import Blueprint,request #nome db: museo
+
+apiBlueprint = Blueprint("apiBlueprint",__name__)
 
 #--OPERE--
-@app.route('/api/getOpere', methods=['GET'])#tutte, maybe parametro per il limit della query
-def getWorks():
+@apiBlueprint.route('/api/getOpere', methods=['GET'])
+def getWorks(args):
+    args.get("limit", default="20", type=str)
     pass
 
-@app.route('/api/getOpereByArtist', methods=['GET'])
-def getOpereByArtist():
+@apiBlueprint.route('/api/getOpereByArtist', methods=['GET'])
+def getOpereByArtist(args):
+    args.get("name", type=str)
     pass
 
-@app.route('/api/getOpereByDate', methods=['GET'])
-def getOpereByDate():
+@apiBlueprint.route('/api/getOpereByDate', methods=['GET'])
+def getOpereByDate(args):
+    args.get("year", type=str)
     pass
 
-@app.route('/api/getOpereByTimeSpan', methods=['GET']) #parametri: data inizio, data fine
-def getOpereByTimeSpan():
+@apiBlueprint.route('/api/getOpereByTimeSpan', methods=['GET']) #parametri: data inizio, data fine
+def getOpereByTimeSpan(args):
+    args.get("bornOrDeath", default="born", type=str)
+    args.get("start", type=str)
+    args.get("end", type=str)
     pass
 
-@app.route('/api/getOpereUrl', methods=['GET'])
+@apiBlueprint.route('/api/getOpereUrl', methods=['GET'])
 def getOpereByType(args):
     args.get("limit", default="20", type=str)
     pass
-@app.route('/api/getOpereUrl_byName', methods=['GET'])
+
+@apiBlueprint.route('/api/getOpereUrl_byName', methods=['GET'])
 def getOpereUrl_byName(args):
     args.get("name", type=str)
     pass
-@app.route('/api/getOpereUrl_byAuthor', methods=['GET'])
+
+@apiBlueprint.route('/api/getOpereUrl_byAuthor', methods=['GET'])
 def getOpereUrl_byAuthor(args):
     args.get("name", type=str)
     pass
@@ -34,14 +43,49 @@ def getOpereUrl_byAuthor(args):
     
 
 #--ARTISTI--
-@app.route('/api/getArtisti', methods=['GET'])#tutti, come getOpere
-def getArtisti():
+@apiBlueprint.route('/api/getArtisti', methods=['GET'])
+def getArtisti(args):
+    args.get("limit", default="20", type=str)
     pass
 
-@app.route('/api/getArtistaByName', methods=['GET'])
-def getArtista():
+@apiBlueprint.route('/api/getArtistaByName', methods=['GET'])
+def getArtista(args):
+    args.get("name", type=str)
     pass
 
-@app.route('/api/getArtistiByDate', methods=['GET'])#@TODO parametro data morte o nascita
-def getOpereByType():
+@apiBlueprint.route('/api/getArtistiByDate', methods=['GET'])
+def getOpereByType(args):
+    args.get("bornOrDeath", default="born", type=str)
+    args.get("date", type=str)
+    pass
+
+
+
+#--CRUD--
+
+@apiBlueprint.route('/api/addArtista', methods=['POST'])
+def addArtista(args):
+    data = request.get_json()
+    pass
+@apiBlueprint.route('/api/addOpera', methods=['POST'])
+def addOpera(args):
+    data = request.get_json()
+    pass
+
+@apiBlueprint.route('/api/updateArtista', methods=['PUT'])
+def updateArtista(args):
+    data = request.get_json()
+    pass
+@apiBlueprint.route('/api/updateOpera', methods=['PUT'])
+def updateOpera(args):
+    data = request.get_json()
+    pass
+
+@apiBlueprint.route('/api/deleteArtista', methods=['DELETE'])
+def deleteArtista(args):
+    data = request.get_json()
+    pass
+@apiBlueprint.route('/api/deleteOpera', methods=['DELETE'])
+def deleteOpera(args):
+    data = request.get_json()
     pass
