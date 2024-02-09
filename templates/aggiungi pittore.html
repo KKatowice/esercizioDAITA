@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invio Dati</title>
+</head>
+<body>
+    <h2>Inserisci i dati di opera e autore</h2>
+    <form action="/add/data/opera&autore" method="post">
+        <label for="autore">Nome autore:</label>
+        <input type="text" id="autore" name="nome"><br><br>
+        <label for="data di nascita">Data di nascita:</label>
+        <input type="date" id="data di nascita" name="nome"><br><br>
+        <label for="data di morte">Data di morte:</label>
+        <input type="date" id="Data di morte" name="nome"><br><br>
+        <label for="data di morte">Nome quadro:</label>
+        <input type="date" id="nome quadro" name="nome"><br><br>
+        <label for="data di morte">Data realizzazione:</label>
+        <input type="date" id="Data realizzazione" name="nome"><br><br>
+
+
+
+
+    </form>
+
+    <button onclick="inviaDatiJSON()">Invia dati JSON</button>
+
+    <script>
+        function inviaDatiJSON() {
+            // Ottieni i dati dal form
+            var nome_ = document.getElementById('nome').value;
+
+
+            // Costruisci l'oggetto JSON
+            var datiJSON = {
+                nome: nome_,
+
+            };
+
+            // Esegui la richiesta POST con i dati JSON
+            fetch('/add/data/category', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datiJSON)
+            });
+        }
+    </script>
+</body>
+</html>
