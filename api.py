@@ -45,7 +45,11 @@ def getOpereByArtist():
     if type(n) != str:
         raise ValueError("Name must be a string")
     c = create_db_connection(dbname)
-    q = f"SELECT * FROM opere WHERE autore = '{n}';"
+    #q = f"SELECT * FROM artisti WHERE autore = '{n}';" #join creazione
+    q = f"""
+    SELECT * FROM opere JOIN creazione JOIN artisti 
+    ON artisti.id_artista = creazione.id_artista AND creazione.id_opera = opere.id_opera
+    WHERE nome = '{n};"""
     res = read_query(c,q)
     c.close()
     return res
@@ -57,7 +61,7 @@ def getOpereByDate():
     if type(y) != int or type(y) != str or len(str(y)) < 3:
         raise ValueError("Year must be a 3/4-digit integer/string")
     c = create_db_connection(dbname)
-    q = f"SELECT * FROM opere WHERE data_pubblicazione = '{y}';"
+    q = f"SELECT * FROM opere WHERE YEAR(data_pubblicazione) = '{y}';"
     res = read_query(c,q)
     c.close()
     return res
@@ -71,7 +75,7 @@ def getOpereByTimeSpan():
     if type(e) != int or type(e) != str or len(str(e)) < 3:
         raise ValueError("Year[end] must be a 3/4-digit integer/string")
     c = create_db_connection(dbname)
-    q = f"SELECT * FROM opere WHERE data_pubblicazione BETWEEN '{s}' AND '{e}';"
+    q = f"SELECT * FROM opere WHERE YEAR(data_pubblicazione) BETWEEN '{s}' AND '{e}';"
     res = read_query(c,q)
     c.close()
     return res
@@ -107,7 +111,9 @@ def getOpereUrl_byAuthor():
     if type(n) != str:
         raise ValueError("Name must be a string")
     c = create_db_connection(dbname)
-    q = f"SELECT url_immagine FROM opere WHERE autore = '{n}';"
+    q=f"""SELECT url_immagine FROM opere JOIN creazione JOIN artisti 
+		ON artisti.id_artista = creazione.id_artista AND creazione.id_opera = opere.id_opera
+		WHERE nome = '{n}';"""
     res = read_query(c,q)
     c.close()
     return res
@@ -151,9 +157,9 @@ def getOpereByType():
         raise ValueError("bornOrDeath must be 'born' or 'death'")
     c = create_db_connection(dbname)
     if bod == "born":
-        q = f"SELECT * FROM artisti WHERE data_nascita = '{d}';"
+        q = f"SELECT * FROM artisti WHERE YEAR(data_nascita) = '{d}';"
     else:
-        q = f"SELECT * FROM artisti WHERE data_morte = '{d}';"
+        q = f"SELECT * FROM artisti WHERE YEAR(data_morte) = '{d}';"
     res = read_query(c,q)
     c.close()
     return res
@@ -161,6 +167,7 @@ def getOpereByType():
 
 
 #--CRUD--
+#datetime formato pe date: 'YYYY-MM-DD HH:MM:SS'
 
 @apiBlueprint.route('/api/addArtista', methods=['POST'])
 def addArtista():
