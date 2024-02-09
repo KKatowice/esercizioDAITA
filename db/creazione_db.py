@@ -6,14 +6,14 @@ connection = create_db_connection("localhost", "root", "", "museo")
 
 artisti = """CREATE TABLE artisti(
             id_artista int PRIMARY KEY AUTO_INCREMENT,
-            nome varchar(255) NOT NULL,
-            nazionalita varchar(255),
-            data_nascita int,
-            data_morte int);"""
+            nome varchar(255) UNIQUE NOT NULL,
+            movimento varchar(255),
+            data_nascita datetime,
+            data_morte datetime);"""
 opere = """CREATE TABLE opere(
             id_opera int PRIMARY KEY AUTO_INCREMENT,
             titolo varchar(255) NOT NULL,
-            data_pubblicazione int,
+            data_pubblicazione datetime,
             url_immagine varchar(255));"""
 creazione = """CREATE TABLE creazione(
                 id int PRIMARY KEY AUTO_INCREMENT,
