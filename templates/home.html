@@ -4,51 +4,89 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Home Page</title>
-    <!-- Includi Bootstrap CSS -->
+
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
-<nav class="navbar navbar-expand-lg bg-body-tertiary">
-  <div class="container-fluid">
-    <a class="navbar-brand" href="home.html">Museo</a>
-    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
-      <span class="navbar-toggler-icon"></span>
-    </button>
-    <div class="collapse navbar-collapse" id="navbarNav">
-      <ul class="navbar-nav">
-        <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="pittori.html">pittori</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link" href="quadri.html">quadri</a>
-        </li>
-        <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
-        </li>
-      </ul>
-    </div>
-  </div>
-</nav>
+    <style>
+        body {
+            background-color: #F0F4F8;
+            color: #333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #3D84A8;
+        }
+        .navbar-brand {
+            color: #F4F1DE;
+            font-weight: bold;
+        }
+        .navbar-nav .nav-link {
+            color: #F4F1DE;
+            font-weight: bold;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #3D84A8;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn-custom {
+            background-color: #63ace5;
+            color: #F4F1DE;
+            border: none;
+            border-radius: 15px;
+            padding: 8px 16px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-custom:hover {
+            background-color: #4682b4;
+        }
+    </style>
 </head>
 <body>
-    <div class="container mt-5">
-        <h1 class="mb-4">Home Page</h1>
+    <nav class="navbar navbar-expand-lg">
+        <div class="container">
+            <a class="navbar-brand" href="home.html">Museo</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav ml-auto">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="pittori.html">Artisti</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="quadri.html">Quadri</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:63342/pythonProject2/esercizioDAITA/templates/aggiungi%20pittore.html?_ijt=sfi8quu0eb67ece7u9khjcjta5&_ij_reload=RELOAD_ON_SAVE">Aggiungi Pittore</a>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </nav>
+
+    <div class="container">
+        <h1>Benvenuti al Museo</h1>
         <div class="row">
             <div class="col-md-6">
-                <a href="/pittori" class="btn btn-primary btn-lg btn-block">Mostra Pittori</a>
-
-
+                <a href="pittori.html" class="btn btn-custom btn-block">Mostra Artisti</a>
             </div>
             <div class="col-md-6">
-                <a href="/quadri" class="btn btn-success btn-lg btn-block">Mostra Quadri</a>
+                <a href="quadri.html" class="btn btn-custom btn-block">Mostra Quadri</a>
+            </div>
+        </div>
+
+        <div class="row mt-4">
+            <div class="col-md-6">
+                <a href="http://localhost:63342/pythonProject2/esercizioDAITA/templates/aggiungi%20pittore.html?_ijt=sfi8quu0eb67ece7u9khjcjta5&_ij_reload=RELOAD_ON_SAVE" class="btn btn-custom btn-block">Aggiungi Pittore</a>
             </div>
         </div>
     </div>
-    <div class="container mt-5">
-         <div class="col-md-6">
-                <a href="/aggiungi opera&pittore" class="btn btn-success btn-lg btn-block">Aggiungi Opera e Pittore</a>
-            </div>
-    </div>
 
-    <!-- Includi Bootstrap JS (opzionale) -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
