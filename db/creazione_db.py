@@ -1,8 +1,8 @@
-from funzioni_sql import *
+from ..dbUtils import *
 
-connection = create_server_connection("localhost", "corsoUser", "asdasd")
+connection = create_server_connection(h,id,psw)
 create_database(connection, "CREATE DATABASE museo")
-connection = create_db_connection("localhost", "corsoUser", "asdasd", "museo")
+connection = create_db_connection("museo")
 
 artisti = """CREATE TABLE artisti(
             id_artista int PRIMARY KEY AUTO_INCREMENT,
@@ -26,4 +26,4 @@ execute_query(connection, artisti)
 execute_query(connection, opere)
 execute_query(connection, creazione)
 
-#PROVA
+

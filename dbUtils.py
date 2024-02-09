@@ -8,6 +8,27 @@ id = os.getenv('ID')
 psw = os.getenv('PSW')
 h = os.getenv('H')
 
+def create_server_connection(host_name, user_name, user_password):
+    connection = None
+    try:
+        connection = mysql.connector.connect(
+            host=h,
+            user=id,
+            passwd=h
+        )
+        print("MySQL Database connection successful")
+    except Error as err:
+        print(f"Error: '{err}'")
+
+    return connection
+
+def create_database(connection, query):
+    cursor = connection.cursor()
+    try:
+        cursor.execute(query)
+        print("Database created successfully")
+    except Error as err:
+        print(f"Error: '{err}'")
 
 def create_db_connection(dbn):
     connection = None
@@ -54,3 +75,12 @@ def read_query(connection, query:str, dic = True):
         
     finally:
         cursor.close()
+
+def execute_many_query(connection, query, lista):
+    cursor = connection.cursor()
+    try:
+        cursor.executemany(query, lista)
+        connection.commit()
+        print("Query successful")
+    except Error as err:
+        print(f"Error: '{err}'")

@@ -1,7 +1,7 @@
 import pandas as pd
-from funzioni_sql import *
+from ..dbUtils import *
 
-connection = create_db_connection("localhost","root", "", "museo")
+connection = create_db_connection("museo")
 df = pd.read_csv(r"../datasetLeo/dati_artisti_opere.csv")
 df['movementLabel'] = df['movementLabel'].fillna('sconosciuto')
 df['artistDeathDate'] = df['artistDeathDate'].fillna('sconosciuto')
