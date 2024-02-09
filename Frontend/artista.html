@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Museo/pittori</title>
+    <!-- Includi Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <nav class="navbar navbar-expand-lg bg-body-tertiary">
+  <div class="container-fluid">
+    <a class="navbar-brand" href="home.html">Museo</a>
+    <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav">
+        <li class="nav-item">
+          <a class="nav-link active" aria-current="page" href="pittori.html">artisti</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="quadri.html">quadri</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+        </li>
+      </ul>
+    </div>
+  </div>
+</nav>
+</head>
+
+<body>
+   <script>
+    // Effettua una richiesta GET all'API
+    fetch('url_dell_api')
+      .then(response => response.json())
+      .then(data => {
+        const cardContainer = document.getElementById('card-container');
+
+        // Itera sui dati JSON
+        data.forEach(item => {
+          // Crea una nuova card Bootstrap
+          const card = document.createElement('div');
+          card.classList.add('col-md-4', 'mb-3');
+
+          // Popola la card con i dati
+          card.innerHTML = `
+            <div class="card">
+              <div class="card-body">
+                <h5 class="card-title">${item.titolo}</h5>
+                <p class="card-text">${item.descrizione}</p>
+                <a href="${item.link}" class="btn btn-primary">Dettagli</a>
+              </div>
+            </div>
+          `;
+
+          // Aggiungi la card al contenitore delle card
+          cardContainer.appendChild(card);
+        });
+      })
+      .catch(error => console.error('Errore durante il recupero dei dati:', error));
+  </script>
+    <!-- Includi Bootstrap JS (opzionale) -->
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+<nav aria-label="Page navigation example">
+  <ul class="pagination justify-content-center">
+    <li class="page-item disabled">
+      <a class="page-link">Previous</a>
+    </li>
+    <li class="page-item"><a class="page-link" href="#">1</a></li>
+    <li class="page-item"><a class="page-link" href="#">2</a></li>
+    <li class="page-item"><a class="page-link" href="#">3</a></li>
+    <li class="page-item">
+      <a class="page-link" href="#">Next</a>
+    </li>
+  </ul>
+</nav>
+</html>
