@@ -185,6 +185,7 @@ def addOpera():
     q = f"INSERT INTO opere (titolo,data_pubblicazione,url_immagine) VALUES ('{data['titolo']}','{data['data_pubblicazione']}','{data['url_immagine']}');"
     execute_query(c,q)
     c.close()
+#TODO: add creazione
 
 
 @apiBlueprint.route('/api/updateArtista', methods=['PUT'])

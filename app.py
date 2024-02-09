@@ -5,8 +5,19 @@ app.register_blueprint(apiBlueprint)
 
 @app.route('/')
 def home():
-   return render_template('index.html')
+   return render_template('home.html')
 
+@app.route('/artisti')
+def artisti():
+   return render_template('pittori.html')
+
+@app.route('/aggiungiArtista')
+def aggiungiArtista():
+   return render_template('aggiungi_pittore.html')
+
+@app.route('/opere')
+def opere():
+   return render_template('opere.html')
 
 
 if __name__ == '__main__':
