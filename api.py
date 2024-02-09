@@ -26,8 +26,8 @@ dbname = 'museo'
 
 #--OPERE--
 @apiBlueprint.route('/api/getOpere', methods=['GET'])
-def getWorks(args):
-    l = args.get("limit", default="20")
+def getWorks():
+    l = request.args.get("limit", default="20")
     if type(l) != int:
         try:
             l = int(l)
@@ -40,8 +40,8 @@ def getWorks(args):
     return res
 
 @apiBlueprint.route('/api/getOpereByArtist', methods=['GET'])
-def getOpereByArtist(args):
-    n = args.get("name", type=str)
+def getOpereByArtist():
+    n = request.args.get("name", type=str)
     if type(n) != str:
         raise ValueError("Name must be a string")
     c = create_db_connection(dbname)
@@ -52,8 +52,8 @@ def getOpereByArtist(args):
     
 
 @apiBlueprint.route('/api/getOpereByDate', methods=['GET'])
-def getOpereByDate(args):
-    y = args.get("year")
+def getOpereByDate():
+    y = request.args.get("year")
     if type(y) != int or type(y) != str or len(str(y)) < 3:
         raise ValueError("Year must be a 3/4-digit integer/string")
     c = create_db_connection(dbname)
@@ -63,9 +63,9 @@ def getOpereByDate(args):
     return res
 
 @apiBlueprint.route('/api/getOpereByTimeSpan', methods=['GET']) 
-def getOpereByTimeSpan(args):
-    s = args.get("start", type=str)
-    e = args.get("end", type=str)
+def getOpereByTimeSpan():
+    s = request.args.get("start", type=str)
+    e = request.args.get("end", type=str)
     if type(s) != int or type(s) != str or len(str(s)) < 3:
         raise ValueError("Year[start] must be a 3/4-digit integer/string")
     if type(e) != int or type(e) != str or len(str(e)) < 3:
@@ -77,8 +77,8 @@ def getOpereByTimeSpan(args):
     return res
 
 @apiBlueprint.route('/api/getOpereUrl', methods=['GET'])
-def getOpereUrl(args):
-    t = args.get("limit", default="20")
+def getOpereUrl():
+    t = request.args.get("limit", default="20")
     if type(t) != int:
         try:
             t = int(t)
@@ -91,8 +91,8 @@ def getOpereUrl(args):
     return res
 
 @apiBlueprint.route('/api/getOpereUrl_byName', methods=['GET'])
-def getOpereUrl_byName(args):
-    n = args.get("name", type=str)
+def getOpereUrl_byName():
+    n = request.args.get("name", type=str)
     if type(n) != str:
         raise ValueError("Name must be a string")
     c = create_db_connection(dbname)
@@ -102,8 +102,8 @@ def getOpereUrl_byName(args):
     return res
 
 @apiBlueprint.route('/api/getOpereUrl_byAuthor', methods=['GET'])
-def getOpereUrl_byAuthor(args):
-    n = args.get("name", type=str)
+def getOpereUrl_byAuthor():
+    n = request.args.get("name", type=str)
     if type(n) != str:
         raise ValueError("Name must be a string")
     c = create_db_connection(dbname)
@@ -116,8 +116,8 @@ def getOpereUrl_byAuthor(args):
 
 #--ARTISTI--
 @apiBlueprint.route('/api/getArtisti', methods=['GET'])
-def getArtisti(args):
-    l = args.get("limit", default="20")
+def getArtisti():
+    l = request.args.get("limit", default="20")
     if type(l) != int:
         try:
             l = int(l)
@@ -130,8 +130,8 @@ def getArtisti(args):
     return res
 
 @apiBlueprint.route('/api/getArtistaByName', methods=['GET'])
-def getArtista(args):
-    n = args.get("name", type=str)
+def getArtista():
+    n = request.args.get("name", type=str)
     if type(n) != str:
         raise ValueError("Name must be a string")
     c = create_db_connection(dbname)
@@ -142,9 +142,9 @@ def getArtista(args):
 
 
 @apiBlueprint.route('/api/getArtistiByDate', methods=['GET'])
-def getOpereByType(args):
-    bod = args.get("bornOrDeath", default="born", type=str)
-    d = args.get("date", type=str)
+def getOpereByType():
+    bod = request.args.get("bornOrDeath", default="born", type=str)
+    d = request.args.get("date", type=str)
     if type(d) != int or type(d) != str or len(str(d)) < 3:
         raise ValueError("Year must be a 3/4-digit integer/string")
     if bod != "born" and bod != "death":
