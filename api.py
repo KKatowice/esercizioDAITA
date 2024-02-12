@@ -41,7 +41,9 @@ def getWorks():
 
 @apiBlueprint.route('/api/getOpereByArtist', methods=['GET'])
 def getOpereByArtist(n):
-    n = request.args.get("name", type=str)
+    if not n:
+        n = request.args.get("name", type=str)
+    print(n,type(n), "in api")
     if type(n) != str:
         raise ValueError("Name must be a string")
     c = create_db_connection(dbname)
@@ -49,7 +51,7 @@ def getOpereByArtist(n):
     q = f"""
     SELECT * FROM opere JOIN creazione JOIN artisti 
     ON artisti.id_artista = creazione.id_artista AND creazione.id_opera = opere.id_opera
-    WHERE nome = '{n};"""
+    WHERE nome = '{n}';"""
     res = read_query(c,q)
     c.close()
     return res

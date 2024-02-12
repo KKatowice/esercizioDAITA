@@ -7,7 +7,7 @@ app.register_blueprint(apiBlueprint)
 def home():
    return render_template('home.html')
 
-@app.route('/pittori.html')
+@app.route('/pittori')
 def artisti():
    artisti = getArtisti()
    return render_template('pittori.html', artisti= artisti)
@@ -16,14 +16,16 @@ def artisti():
 def aggiungiArtista():
    return render_template('aggiungi_pittore.html')
 
-@app.route('/quadri.html')
+@app.route('/quadri')
 def opere():
-   n = request.args.get("nome")
+   n = str(request.args.get("nome"))
+   print(n, type(n))
+   print("vivo")
    if n:
       opere = getOpereByArtist(n)
    else:
       opere = getWorks()
-   return render_template('opere.html', opere=opere)
+   return render_template('quadri.html', opere=opere)
 
 
 if __name__ == '__main__':
