@@ -1,22 +1,33 @@
 import pandas as pd
-from ..dbUtils import *
+from dbUtils import *
+import datetime
+import re
 
 connection = create_db_connection("museo")
 df = pd.read_csv(r"../datasetLeo/dati_artisti_opere.csv")
 df['movementLabel'] = df['movementLabel'].fillna('sconosciuto')
-df['artistDeathDate'] = df['artistDeathDate'].fillna('sconosciuto')
-df['artistBirthDate'] = df['artistBirthDate'].fillna('sconosciuto')
-
+placeh = str(datetime.datetime.now()).split(" ")[0]
+df['artistDeathDate'] = df['artistDeathDate'].fillna(placeh)
+df['artistBirthDate'] = df['artistBirthDate'].fillna(placeh)
+#print(placeh)
 
 def replace_http(value):
     if isinstance(value, str) and value.startswith('http'):
         return 'sconosciuto'
     else:
         return value
+    
+def replace_httpDate(value):
+    if isinstance(value, str) and value.startswith('http'):
+        return placeh
+    else:
+        #print(value, value.split("T")[0])
+        if bool(re.search(r"^\d{4}-\d{2}-\d{2}$",value)):
+            return value.split("T")[0]
 
 df['artistLabel'] = df['artistLabel'].apply(replace_http)
-df['artistBirthDate'] = df['artistBirthDate'].apply(replace_http)
-
+df['artistBirthDate'] = df['artistBirthDate'].apply(replace_httpDate)
+df['artistDeathDate']  = df['artistDeathDate'].apply(replace_httpDate)
 df.drop_duplicates(subset='artistLabel', inplace=True)
 
 
@@ -39,8 +50,9 @@ lista_creazione = []
 c = 1
 for e in df.itertuples():
     lista_opere.append((e[2], e[6], e[5]))
-    a = read_query(connection, f"SELECT id_artista FROM artisti WHERE nome = '{e[4]}'")
+    a = read_query(connection, f"""SELECT id_artista FROM artisti WHERE nome = "{e[4]}";""")
     if a:
+        print(a)
         lista_creazione.append((a[0][0], c))
         c +=1
 
