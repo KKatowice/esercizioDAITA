@@ -71,14 +71,15 @@
 <body>
     <div class="container mt-5">
         <h1>Tutti i pittori</h1>
-        <ul class="list-group mt-3">
             {% for artista in artisti %}
+            <ul class="list-group mt-3">
                 <li class="list-group-item">{{ artista['nome'] }}</li>
                 <li class="list-group-item">{{ artista['movimento'] }}</li>
                 <li class="list-group-item">{{ artista['data_nascita'] }}</li>
                 <li class="list-group-item">{{ artista['data_morte'] }}</li>
+            </ul>
             {% endfor %}
-        </ul>
+
     </div>
     <!-- Includi Bootstrap JS (opzionale) -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
