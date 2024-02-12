@@ -200,7 +200,7 @@ def addOpera():
 def updateArtista():
     data = request.get_json()
     c = create_db_connection(dbname)
-    q = f"UPDATE artisti SET nazionalita = '{data['nazionalita']}', data_nascita = '{data['data_nascita']}', data_morte = '{data['data_morte']}' WHERE nome = '{data['nome']}';"
+    q = f"UPDATE artisti SET data_nascita = '{data['data_nascita']}', data_morte = '{data['data_morte']}' WHERE nome = '{data['nome']}';"
     execute_query(c,q)
     c.close()
 
