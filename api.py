@@ -173,7 +173,7 @@ def getOpereByType():
 def addArtista():
     data = request.get_json()
     c = create_db_connection(dbname)
-    q = f"INSERT INTO artisti (nome,nazionalita,data_nascita,data_morte) VALUES ('{data['nome']}','{data['nazionalita']}','{data['data_nascita']}','{data['data_morte']}');"
+    q = f"INSERT INTO artisti (nome,movimento,data_nascita,data_morte) VALUES ('{data['nome']}','{data['movimento']}','{data['data_nascita']}','{data['data_morte']}');"
     execute_query(c,q)
     c.close()
 

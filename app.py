@@ -1,4 +1,4 @@
-from flask import Flask, render_template
+from flask import Flask, render_template, request
 from api import apiBlueprint
 app = Flask(__name__)
 app.register_blueprint(apiBlueprint)
@@ -9,7 +9,8 @@ def home():
 
 @app.route('/artisti')
 def artisti():
-   return render_template('pittori.html')
+   artisti = getArtisti()
+   return render_template('pittori.html', artisti= artisti)
 
 @app.route('/aggiungiArtista')
 def aggiungiArtista():
@@ -17,7 +18,8 @@ def aggiungiArtista():
 
 @app.route('/opere')
 def opere():
-   return render_template('opere.html')
+   opere = getWorks()
+   return render_template('opere.html', opere=opere)
 
 
 if __name__ == '__main__':
