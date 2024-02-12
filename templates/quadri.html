@@ -6,6 +6,45 @@
     <title>Museo/quadri</title>
     <!-- Includi Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #F0F4F8;
+            color: #333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #3D84A8;
+        }
+        .navbar-brand {
+            color: #F4F1DE;
+            font-weight: bold;
+        }
+        .navbar-nav .nav-link {
+            color: #F4F1DE;
+            font-weight: bold;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #3D84A8;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn-custom {
+            background-color: #63ace5;
+            color: #F4F1DE;
+            border: none;
+            border-radius: 15px;
+            padding: 8px 16px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-custom:hover {
+            background-color: #4682b4;
+        }
+    </style>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="home.html">Museo</a>
@@ -15,13 +54,13 @@
     <div class="collapse navbar-collapse" id="navbarNav">
       <ul class="navbar-nav">
         <li class="nav-item">
-          <a class="nav-link active" aria-current="page" href="pittori.html">quadri</a>
+          <a class="nav-link active" aria-current="page" href="pittori.html">pittori</a>
         </li>
         <li class="nav-item">
           <a class="nav-link" href="quadri.html">quadri</a>
         </li>
         <li class="nav-item">
-          <a class="nav-link disabled" aria-disabled="true">Disabled</a>
+          <a class="nav-link disabled" aria-disabled="true">Aggiungi pittore</a>
         </li>
       </ul>
     </div>
@@ -30,7 +69,7 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h1>Tutti i pittori</h1>
+        <h1>Tutti i quadri</h1>
         <ul class="list-group mt-3">
             {% for quadro in quadri %}
                 <li class="list-group-item">{{ quadro.title }}</li>

@@ -1,0 +1,126 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invio Dati</title>
+     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #F0F4F8;
+            color: #333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #3D84A8;
+        }
+        .navbar-brand {
+            color: #F4F1DE;
+            font-weight: bold;
+        }
+        .navbar-nav .nav-link {
+            color: #F4F1DE;
+            font-weight: bold;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #3D84A8;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn-custom {
+            background-color: #63ace5;
+            color: #F4F1DE;
+            border: none;
+            border-radius: 15px;
+            padding: 8px 16px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-custom:hover {
+            background-color: #4682b4;
+        }
+    </style>
+</head>
+<body>
+    <h2>Inserisci i dati dell'autore</h2>
+    <form action="/add/data/opera&autore" method="post">
+        <label for="autore">Nome autore:</label>
+        <input type="text" id="autore" name="nome"><br><br>
+        <label for="data_di_nascita">Data di nascita:</label>
+        <input type="date" id="data_di_nascita" name="nome"><br><br>
+        <label for="data_di_morte">Data di morte:</label>
+        <input type="date" id="data_di_morte" name="nome"><br><br>
+        <label for="movimento">movimento:</label>
+        <input type="text" id="movimento" name="nome"><br><br>
+    </form>
+    <button onclick="inviaDatiJSONautore()">Invia dati JSON autore</button>
+    <h2>Inserisci i dati dell'opera</h2>
+    <form action="/add/data/opera&autore" method="post">
+        <label for="nome_quadro">Nome quadro:</label>
+        <input type="text" id="nome_quadro" name="nome"><br><br>
+        <label for="Data_pubblicazione">Data realizzazione:</label>
+        <input type="date" id="Data_pubblicazione" name="nome"><br><br>
+        <label for="nome_autore">Nome autore:</label>
+        <input type="date" id="nome_autore" name="nome"><br><br>
+
+
+    </form>
+
+    <button onclick="inviaDatiJSONopera()">Invia dati JSON opera</button>
+
+    <script>
+        function inviaDatiJSONautore() {
+            // Ottieni i dati dal form
+            var nome_ = document.getElementById('autore').value;
+            var data_nascita = document.getElementById('data_di_nascita').value;
+            var data_morte = document.getElementById('data_di_morte').value;
+            var movimento_ = document.getElementById('movimento').value;
+
+
+            // Costruisci l'oggetto JSON
+            var datiJSON = {
+                autore: nome_,
+                movimento: movimento_,
+                data_di_nascita: data_nascita,
+                data_di_morte: data_morte
+            };
+
+            // Esegui la richiesta POST con i dati JSON
+            fetch('/api/addArtista', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datiJSON)
+            });
+        }
+        function inviaDatiJSONopera() {
+            // Ottieni i dati dal form
+            var nome_quadro = document.getElementById('nome_quadro').value;
+            var Data_pubblicazione = document.getElementById('Data_pubblicazione').value;
+            var nome_autore = document.getElementById('nome_autore').value;
+
+            // Costruisci l'oggetto JSON
+            var datiJSON = {
+                quadro: nome_quadro,
+                data_pubblicazione: Data_pubblicazione ,
+                autore: nome_autore,
+
+            };
+
+            // Esegui la richiesta POST con i dati JSON
+            fetch('/api/addOpera', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datiJSON)
+            });
+        }
+    </script>
+</body>
+</html>
