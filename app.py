@@ -1,5 +1,5 @@
 from flask import Flask, render_template, request
-from api import apiBlueprint
+from api import *
 app = Flask(__name__)
 app.register_blueprint(apiBlueprint)
 
@@ -7,7 +7,7 @@ app.register_blueprint(apiBlueprint)
 def home():
    return render_template('home.html')
 
-@app.route('/artisti')
+@app.route('/pittori.html')
 def artisti():
    artisti = getArtisti()
    return render_template('pittori.html', artisti= artisti)

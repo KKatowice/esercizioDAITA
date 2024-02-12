@@ -189,6 +189,7 @@ def addOpera():
     q3 = "SELECT id_opera FROM opere ORDER BY id_opera DESC LIMIT 1;"
     id_opera = read_query(c, q3)[0][0]
     q4 = f"INSERT INTO creazione(id_artista, id_opera) VALUES ('{id_artista}', '{id_opera}';"
+    execute_query(c, q4)
     c.close()
 #TODO: add creazione
 
