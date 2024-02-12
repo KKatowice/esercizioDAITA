@@ -45,6 +45,9 @@
             background-color: #4682b4;
         }
     </style>
+
+</head>
+<body>
     <nav class="navbar navbar-expand-lg bg-body-tertiary">
   <div class="container-fluid">
     <a class="navbar-brand" href="home.html">Museo</a>
@@ -66,15 +69,17 @@
     </div>
   </div>
 </nav>
-</head>
-<body>
     <div class="container mt-5">
         <h1>Tutti i quadri</h1>
-        <ul class="list-group mt-3">
-            {% for quadro in quadri %}
-                <li class="list-group-item">{{ quadro.title }}</li>
+
+            {% for opera in opere %}
+            <ul class="list-group mt-3">
+                <li class="list-group-item">{{ opera['titolo'] }}</li>
+                <li class="list-group-item">{{ opera['data_pubblicazione'] }}</li>
+                <li class="list-group-item"><img src="{{ url_for('apiBlueprint.getWorks', opera_id=opera['url_immagine']) }}"></li>
+            </ul>
             {% endfor %}
-        </ul>
+
     </div>
     <!-- Includi Bootstrap JS (opzionale) -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>

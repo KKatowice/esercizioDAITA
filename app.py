@@ -16,10 +16,10 @@ def artisti():
 def aggiungiArtista():
    return render_template('aggiungi_pittore.html')
 
-@app.route('/opere')
+@app.route('/quadri.html')
 def opere():
    opere = getWorks()
-   return render_template('opere.html', opere=opere)
+   return render_template('quadri.html', opere=opere)
 
 
 if __name__ == '__main__':
