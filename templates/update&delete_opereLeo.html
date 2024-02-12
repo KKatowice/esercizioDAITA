@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Invio Dati</title>
+     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        body {
+            background-color: #F0F4F8;
+            color: #333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+        }
+        .navbar {
+            background-color: #3D84A8;
+        }
+        .navbar-brand {
+            color: #F4F1DE;
+            font-weight: bold;
+        }
+        .navbar-nav .nav-link {
+            color: #F4F1DE;
+            font-weight: bold;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h1 {
+            color: #3D84A8;
+            text-align: center;
+            margin-bottom: 30px;
+        }
+        .btn-custom {
+            background-color: #63ace5;
+            color: #F4F1DE;
+            border: none;
+            border-radius: 15px;
+            padding: 8px 16px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-custom:hover {
+            background-color: #4682b4;
+        }
+    </style>
+</head>
+<body>
+    <h2>elimina opera</h2>
+    <form action='/api/deleteOpera' method="post">
+        <label for="autore">Nome opera da eliminare</label>
+        <input type="text" id="autore" name="nome"><br><br>
+    </form>
+    <button onclick="inviaDatiJSONautore()">elimina opera</button>
+
+    <h2>Aggiorna opera</h2>
+    <form action='/api/updateOpera' method="post">
+        <label for="nome_quadro">Nome opera</label>
+        <input type="text" id="nome_quadro" name="nome"><br><br>
+        <label for="immagine">immagine</label>
+        <input type="text" id="immagine" name="nome"><br><br>
+        <label for="data_pubbl">data di pubblicazione</label>
+        <input type="date" id="data_pubbl" name="nome"><br><br>
+    </form>
+    <button onclick="inviaDatiJSONopera()">aggiorna dati opera</button>
+
+    <script>
+
+    function cancellaDatiJSONopera() {
+        // Ottieni il nome dell'opera da cancellare
+        var nome_opera = document.getElementById('nome_opera').value;
+
+        // Esegui la richiesta DELETE all'endpoint appropriato
+        fetch('/api/deleteOpera/' + nome_opera, {
+            method: 'DELETE'
+        });
+    }
+    function aggiornaDatiJSONopera() {
+    // Ottieni il nome dell'opera da aggiornare
+    var nome_opera = document.getElementById('nome_opera').value;
+    var immagine = document.getElementById('immagine').value;
+    var data_pubbl = document.getElementById('data_pubbl').value;
+
+    // Esegui la richiesta PUT all'endpoint appropriato
+    fetch('/api/updateOpera' + nome_opera, {
+        method: 'PUT'
+    });
+}
+
+</script>
+
+</body>
+</html>
