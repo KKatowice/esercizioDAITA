@@ -95,10 +95,43 @@
                 </li>
               </ul>
             </div>
-            <a  href="/quadri?nome={{ artista['nome'] }}"><button>Vedi opere</button></a>
+            <div class="d-flex justify-content-around mb-4 mt-1">
+              <a href="/quadri?nome={{ artista['nome'] }}"><button class="btn btn-primary">Vedi opere</button></a>
+              <button type="button" class="btn btn-primary" onclick="openPopup('{{ artista['nome'] }}')">Modifica</button>
+
+            </div>
+          </div>
+          <script>
+            function openPopup(nomeArtista) {
+              // Visualizza il popup di modifica
+              document.getElementById('modificaPopup').style.display = 'flex';
+              // Qui puoi aggiungere del codice per precompilare i campi del popup con i dati dell'artista selezionato
+            }
+
+            function closePopup() {
+              // Nasconde il popup di modifica
+              document.getElementById('modificaPopup').style.display = 'none';
+            }
+          </script>
+          <!-- Modal -->
+          <div class="modal" id="modificaPopup" style=" display: none;width: 25%; height: 25%; justify-content: center; align-items: center;flex-direction: column;">
+            <span class="close" onclick="closePopup()">&times;</span>
+            
+            <div class="modal-content">
+              Nome
+              <input placeholder="{{ artista['nome'] }}">
+
+              Data nascita
+              <input placeholder="{{ artista['data_nascita'] }}">
+
+              Data morte
+              <input placeholder="{{ artista['data_morte'] }}">
+            </div>
+            <button>Conferma</button>
+            <button style="color:red">Cancella Artista</button>
           </div>
         {% endfor %}
-
+          
     </div>
     <!-- Includi Bootstrap JS (opzionale) -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
