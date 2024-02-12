@@ -59,19 +59,22 @@
       left: 50%;
       transform: translate(-50%, -50%);
       border: 1px solid blue;
-      background-color: white;
+      border-radius: 2%;
+      background-color: rgba(255, 255, 255, 0.6);
 
     }
     .modal input{
       width: 60%;
       text-align: center;
       margin-bottom: 2%;
+      border-radius: 2%;
     }
     .modal-content{
       border: none;
       display: flex;
       justify-content: center;
       align-items: center;
+      background-color: transparent;
     }
 
     #overlay {
@@ -149,7 +152,7 @@
     <!-- Popup -->
     <div id="overlay"></div>
     <div class="modal " id="modificaPopup"
-      style=" display: none;width: 25%; height: 30%; justify-content: center; align-items: center;flex-direction: column;">
+      style=" display: none;width: 25%; height: 35%; justify-content: center; align-items: center;flex-direction: column;">
       <span class="close" onclick="closePopup()">&times;</span>
 
       <div class="modal-content">
@@ -162,8 +165,8 @@
         Data morte
         <input value="{{ artista['data_morte'] }}" placeholder="{{ artista['data_morte'] }}">
       </div>
-      <button style="background-color:blue; color: white; width: 50%;">Conferma</button>
-      <button style="background-color:red; width: 60%;">Cancella Artista</button>
+      <button class="btn btn-primary" style="background-color:blue; color: white; width: 50%;">Conferma</button>
+      <button class="btn btn-primary" style="background-color:red; width: 60%;margin-top:1%">Cancella Artista</button>
     </div>
     <!-- Script -->
     <script>
