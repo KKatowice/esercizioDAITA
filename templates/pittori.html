@@ -60,7 +60,7 @@
       transform: translate(-50%, -50%);
       border: 1px solid blue;
       border-radius: 2%;
-      background-color: rgba(255, 255, 255, 0.6);
+      background-color: rgba(255, 255, 255, 0.75);
 
     }
     .modal input{
@@ -116,7 +116,6 @@
 <body>
   <h1>Tutti i pittori</h1>
   <div class="row mr-4 ml-4">
-
     {% for artista in artisti %}
     <div class="col-lg-3 col-md-4 col-sm-6 ">
       <div class="card mt-3">
@@ -145,54 +144,103 @@
       </div>
       <div class="d-flex justify-content-around mb-4 mt-1">
         <a href="/quadri?nome={{ artista['nome'] }}"><button class="btn btn-primary">Vedi opere</button></a>
-        <button type="button" class="btn btn-primary" onclick="openPopup('{{ artista['nome'] }}')">Modifica</button>
+        <button type="button" class="btn btn-primary" onclick="openPopup('{{ artista['nome'] }}', '{{ loop.index }}')">Modifica </button>
 
       </div>
     </div>
     
     <!-- Popup -->
     <div id="overlay"></div>
-    <div class="modal " id="modificaPopup" 
+    <div class="modal " id="modificaPopup-{{ loop.index }}" 
       style=" display: none;width: 25%; height: 35%; justify-content: center; align-items: center;flex-direction: column;">
-      <span class="close" onclick="closePopup()">&times;</span>
+      <span class="close" onclick="closePopup('{{ loop.index }}')">&times;</span>
 
       <div class="modal-content">
-        Nome
+        Nome 
         <input value="{{ artista['nome'] }}" placeholder="{{ artista['nome'] }}">
 
-        Data nascita
+        Data nascita 
         <input value="{{ artista['data_nascita'] }}" placeholder="{{ artista['data_nascita'] }}">
 
         Data morte
         <input value="{{ artista['data_morte'] }}" placeholder="{{ artista['data_morte'] }}">
       </div>
-      <button class="btn btn-primary" style="background-color:blue; color: white; width: 50%;">Conferma</button>
-      <button class="btn btn-primary" style="background-color:red; width: 60%;margin-top:1%">Cancella Artista</button>
+      <button onclick="updateArtist(this)" class="btn btn-primary" style="background-color:blue; color: white; width: 50%;">Conferma</button>
+      <button onclick="deleteArtist('{{ artista['nome'] }}')" class="btn btn-primary" style="background-color:red; width: 60%;margin-top:1%">Cancella Artista</button>
     </div>
-    <!-- Script -->
-    <script>
-      function openPopup() {
-        // Visualizza il popup 
-        document.getElementById('modificaPopup').style.display = 'flex';
-        document.getElementById('overlay').style.display = 'block'; // Mostra l'overlay
-      }
+{% endfor %}
 
-      function closePopup() {
-        // Nasconde il popup 
-        document.getElementById('modificaPopup').style.display = 'none';
-        document.getElementById('overlay').style.display = 'none'; // Mostra l'overlay
+<!-- Script -->
+<script>
+
+  function deleteArtist(art){
+    
+    let res = fetch('/pittori', {
+      method: 'DELETE',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({'nome': art})
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+
+  }
+  function updateArtist(buttonElement){
+    var modal = buttonElement.closest('.modal');
+    var inputs = modal.querySelectorAll('input');
+    var nome = inputs[0].value;
+    var dataNascita = inputs[1].value;
+    var dataMorte = inputs[2].value;
+    var artistData = {
+        nome: nome,
+        data_nascita: dataNascita,
+        data_morte: dataMorte,
+        additionalInfo: additionalInfo
+    };
+    console.log(artistData)
+    let res = fetch('/pittori', {
+      method: 'PUT',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({'nome': art})
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+
+  }
+
+  function openPopup(nome, index) {
+    // Visualizza il popup 
+    document.getElementById('modificaPopup-' + index).style.display = 'flex';
+    document.getElementById('overlay').style.display = 'block'; // Mostra l'overlay
+  }
+
+  function closePopup(index) {
+    // Nasconde il popup 
+    document.getElementById('modificaPopup-' + index).style.display = 'none';
+    document.getElementById('overlay').style.display = 'none'; // Mostra l'overlay
+  }
+  /* document.addEventListener('click', function(event) {
+      var popup = document.getElementById('modificaPopup-' + index);
+      if (!popup.contains(event.target)) {
+        closePopup(index);
       }
-      /* window.addEventListener('click', function(event) {
-        var modal = document.getElementById('modificaPopup');
-        
-        if (event.target != modal && modal.style.display = "none") {
-          console.log("si",modal.style.display)
-          closePopup();
-        }
-      }); */
-      
-    </script>
-    {% endfor %}
+    }); */
+</script>
+
+
 
   </div>
   <!-- Includi Bootstrap JS (opzionale) -->
