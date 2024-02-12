@@ -12,21 +12,99 @@
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <style>
         /* Stili CSS qui */
+        body {
+            background-color: #F0F4F8;
+            color: #333;
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+        }
+        .navbar {
+            background-color: #3D84A8;
+        }
+        .navbar-brand {
+            color: #F4F1DE;
+            font-weight: bold;
+        }
+        .navbar-nav .nav-link {
+            color: #F4F1DE;
+            font-weight: bold;
+        }
+        .container {
+            margin-top: 50px;
+        }
+        h2 {
+            color: #3D84A8;
+            margin-bottom: 10px;
+        }
+        p {
+            color: #333;
+        }
+        .btn-custom {
+            background-color: #63ace5;
+            color: #F4F1DE;
+            border: none;
+            border-radius: 15px;
+            padding: 8px 16px;
+            transition: background-color 0.3s ease;
+        }
+        .btn-custom:hover {
+            background-color: #4682b4;
+        }
+        hr {
+            width: 50%;
+            margin: 20px 0;
+        }
+        /* Stili aggiuntivi per posizionare i form e i pulsanti */
+        .flex-container {
+            display: flex;
+            justify-content: space-between;
+            width: 80%;
+        }
+        .form-container {
+            width: 40%;
+        }
+        .button-container {
+            width: 40%;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
     </style>
 </head>
 <body>
-    <h2>Aggiorna artista</h2>
-    <form action='/api/updateArtista' method='post'>
-        <label for="nome_artista">Nome artista</label>
-        <input type="text" id="nome_artista" name="nome"><br><br>
-        <label for="data_nascita">Data di nascita</label>
-        <!-- Input per la selezione della data di nascita -->
-        <input type="text" id="data_nascita" name="data_nascita"><br><br>
-        <label for="data_morte">Data di morte</label>
-        <!-- Input per la selezione della data di morte -->
-        <input type="text" id="data_morte" name="data_morte"><br><br>
-        <button onclick="inviaDatiJSONartista()">Aggiorna dati artista</button>
-    </form>
+    <div class="flex-container">
+        <div class="form-container">
+            <h2>Elimina artista</h2>
+            <form action='/api/deleteArtista' method='post'>
+                <label for="autore">Nome artista da eliminare</label>
+                <input type="text" id="autore" name="nome"><br><br>
+            </form>
+            <button onclick="inviaDatiJSONautore()">Elimina artista</button>
+        </div>
+        <div class="button-container">
+            <hr>
+        </div>
+        <div class="form-container">
+            <h2>Aggiorna artista</h2>
+            <form action='/api/updateArtista' method='post'>
+                <label for="nome_artista">Nome artista</label>
+                <input type="text" id="nome_artista" name="nome"><br><br>
+                <label for="data_nascita">Data di nascita</label>
+                <!-- Input per la selezione della data di nascita -->
+                <input type="text" id="data_nascita" name="data_nascita"><br><br>
+                <label for="data_morte">Data di morte</label>
+                <!-- Input per la selezione della data di morte -->
+                <input type="text" id="data_morte" name="data_morte"><br><br>
+            </form>
+            <button onclick="inviaDatiJSONartista()">Aggiorna dati artista</button>
+        </div>
+    </div>
 
     <script>
         // Inizializzazione del Datepicker per la data di nascita
