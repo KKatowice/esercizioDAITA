@@ -4,90 +4,54 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invio Dati</title>
-     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Aggiungi jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Aggiungi jQuery UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <style>
-        body {
-            background-color: #F0F4F8;
-            color: #333;
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-        }
-        .navbar {
-            background-color: #3D84A8;
-        }
-        .navbar-brand {
-            color: #F4F1DE;
-            font-weight: bold;
-        }
-        .navbar-nav .nav-link {
-            color: #F4F1DE;
-            font-weight: bold;
-        }
-        .container {
-            margin-top: 50px;
-        }
-        h1 {
-            color: #3D84A8;
-            text-align: center;
-            margin-bottom: 30px;
-        }
-        .btn-custom {
-            background-color: #63ace5;
-            color: #F4F1DE;
-            border: none;
-            border-radius: 15px;
-            padding: 8px 16px;
-            transition: background-color 0.3s ease;
-        }
-        .btn-custom:hover {
-            background-color: #4682b4;
-        }
+        /* Stili CSS qui */
     </style>
 </head>
 <body>
-    <h2>elimina artista</h2>
-    <form action='/api/deleteArtista' method='post'>
-        <label for="autore">Nome artista da eliminare</label>
-        <input type="text" id="autore" name="nome"><br><br>
-    </form>
-    <button onclick="inviaDatiJSONautore()">elimina artista</button>
-
     <h2>Aggiorna artista</h2>
     <form action='/api/updateArtista' method='post'>
         <label for="nome_artista">Nome artista</label>
         <input type="text" id="nome_artista" name="nome"><br><br>
         <label for="data_nascita">Data di nascita</label>
-        <input type="date" id="data_nascita" name="nome"><br><br>
+        <!-- Input per la selezione della data di nascita -->
+        <input type="text" id="data_nascita" name="data_nascita"><br><br>
         <label for="data_morte">Data di morte</label>
-        <input type="date" id="data_morte" name="nome"><br><br>
+        <!-- Input per la selezione della data di morte -->
+        <input type="text" id="data_morte" name="data_morte"><br><br>
+        <button onclick="inviaDatiJSONartista()">Aggiorna dati artista</button>
     </form>
-    <button onclick="inviaDatiJSONartista()">aggiorna dati artista</button>
 
     <script>
-
-    function cancellaDatiJSONartista() {
-        // Ottieni il nome dell'opera da cancellare
-        var nome_artista = document.getElementById('nome_artista').value;
-
-        // Esegui la richiesta DELETE all'endpoint appropriato
-        fetch('/api/deleteArtista/' + nome_artista, {
-            method: 'DELETE'
+        // Inizializzazione del Datepicker per la data di nascita
+        $(function() {
+            $("#data_nascita").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                dateFormat: 'yy-mm-dd',
+                minDate: new Date(1900, 0, 1),
+                maxDate: new Date(2024, 11, 31)
+            });
         });
-    }
-        function aggiornaDatiJSONartista() {
-    // Ottieni il nome dell'opera da aggiornare
-    var nome_artista = document.getElementById('nome_artista').value;
-    var data_nascita = document.getElementById('data_nascita').value;
-    var data_morte = document.getElementById('data_morte').value;
 
-    // Esegui la richiesta PUT all'endpoint appropriato
-    fetch('/api/updateOpera' + nome_opera, {
-        method: 'PUT'
-    });
-}
-
-</script>
-
+        // Inizializzazione del Datepicker per la data di morte
+        $(function() {
+            $("#data_morte").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                dateFormat: 'yy-mm-dd',
+                minDate: new Date(1900, 0, 1),
+                maxDate: new Date(2024, 11, 31)
+            });
+        });
+    </script>
 </body>
 </html>
