@@ -18,8 +18,12 @@ def aggiungiArtista():
 
 @app.route('/quadri.html')
 def opere():
-   opere = getWorks()
-   return render_template('quadri.html', opere=opere)
+   n = request.args.get("nome")
+   if n:
+      opere = getOpereByArtist(n)
+   else:
+      opere = getWorks()
+   return render_template('opere.html', opere=opere)
 
 
 if __name__ == '__main__':

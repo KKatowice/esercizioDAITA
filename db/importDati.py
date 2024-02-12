@@ -21,14 +21,17 @@ def replace_httpDate(value):
     if isinstance(value, str) and value.startswith('http'):
         return placeh
     else:
-        #print(value, value.split("T")[0])
-        if bool(re.search(r"^\d{4}-\d{2}-\d{2}$",value)):
+        print(value)
+        rgx = r"\b[1-9]\d{3}-\d{2}-\d{2}T"
+        print(value, value, bool(re.search(rgx,value)))
+        if bool(re.search(rgx,value)):
             return value.split("T")[0]
+
 
 df['artistLabel'] = df['artistLabel'].apply(replace_http)
 df['artistBirthDate'] = df['artistBirthDate'].apply(replace_httpDate)
 df['artistDeathDate']  = df['artistDeathDate'].apply(replace_httpDate)
-print(df.head)
+#print(df.head)
 df['creationDate']  = df['creationDate'].apply(replace_httpDate)
 df.drop_duplicates(subset='artistLabel', inplace=True)
 
@@ -54,7 +57,7 @@ for e in df.itertuples():
     lista_opere.append((e[2], e[6], e[5]))
     a = read_query(connection, f"""SELECT id_artista FROM artisti WHERE nome = "{e[4]}";""")
     if a:
-        print(a)
+        #print(a)
         lista_creazione.append((a[0]['id_artista'], c))
         c +=1
 

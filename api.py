@@ -40,7 +40,7 @@ def getWorks():
     return res
 
 @apiBlueprint.route('/api/getOpereByArtist', methods=['GET'])
-def getOpereByArtist():
+def getOpereByArtist(n):
     n = request.args.get("name", type=str)
     if type(n) != str:
         raise ValueError("Name must be a string")

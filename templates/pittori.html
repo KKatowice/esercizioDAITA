@@ -68,17 +68,36 @@
 </nav>
 </head>
 
-<body>
-    <div class="container mt-5">
-        <h1>Tutti i pittori</h1>
-            {% for artista in artisti %}
-            <ul class="list-group mt-3">
-                <li class="list-group-item">{{ artista['nome'] }}</li>
-                <li class="list-group-item">{{ artista['movimento'] }}</li>
-                <li class="list-group-item">{{ artista['data_nascita'] }}</li>
-                <li class="list-group-item">{{ artista['data_morte'] }}</li>
-            </ul>
-            {% endfor %}
+<body><h1>Tutti i pittori</h1>
+    <div class="row mr-4 ml-4">
+        
+      {% for artista in artisti %}
+        <div class="col-lg-3 col-md-4 col-sm-6 ">
+          <div class="card mt-3">
+            <div class="card-header"><h3><b>{{ artista['nome'] }}</b></h3></div>
+              <ul class="list-group list-group-flush">
+                  <li class="list-group-item"><strong>Movimento:</strong> {{ artista['movimento'] }}</li>
+                  <li class="list-group-item">
+                    <strong>Data di nascita:</strong> 
+                    {% if artista['data_nascita'] is not none %}
+                        {{ artista['data_nascita'].strftime('%d-%m-%Y') }}
+                    {% else %}
+                        Sconosciuto
+                    {% endif %}
+                </li>
+                <li class="list-group-item">
+                    <strong>Data di morte:</strong> 
+                    {% if artista['data_morte'] is not none %}
+                        {{ artista['data_morte'].strftime('%d-%m-%Y') }}
+                    {% else %}
+                    Sconosciuto
+                    {% endif %}
+                </li>
+              </ul>
+            </div>
+            <a  href="/opere?nome={{ artista['nome'] }}"><button>Vedi opere</button></a>
+          </div>
+        {% endfor %}
 
     </div>
     <!-- Includi Bootstrap JS (opzionale) -->
