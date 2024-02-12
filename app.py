@@ -12,9 +12,9 @@ def artisti():
    artisti = getArtisti()
    return render_template('pittori.html', artisti= artisti)
 
-@app.route('/aggiungiArtista')
+@app.route('/aggiungi_pittore_opera')
 def aggiungiArtista():
-   return render_template('aggiungi_pittore.html')
+   return render_template('aggiungi_pittore_opera.html')
 
 @app.route('/quadri')
 def opere():
