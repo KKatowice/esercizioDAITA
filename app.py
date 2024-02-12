@@ -20,7 +20,7 @@ def aggiungiArtista():
 def opere():
    n = str(request.args.get("nome"))
    print(n, type(n))
-   print("vivo")
+   print("vivo ")
    if n:
       opere = getOpereByArtist(n)
    else:
