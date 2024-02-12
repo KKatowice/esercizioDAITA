@@ -173,7 +173,7 @@ def getOpereByType():
 def addArtista():
     data = request.get_json()
     c = create_db_connection(dbname)
-    q = f"INSERT INTO artisti (nome,movimento,data_nascita,data_morte) VALUES ('{data['nome']}','{data['movimento']}','{data['data_nascita']}','{data['data_morte']}');"
+    q = f"INSERT INTO artisti (nome,movimento,data_nascita,data_morte) VALUES ('{data['autore']}','{data['movimento']}','{data['data_di_nascita']}','{data['data_di_morte']}');"
     execute_query(c,q)
     c.close()
 
@@ -182,8 +182,13 @@ def addArtista():
 def addOpera():
     data = request.get_json()
     c = create_db_connection(dbname)
-    q = f"INSERT INTO opere (titolo,data_pubblicazione,url_immagine) VALUES ('{data['titolo']}','{data['data_pubblicazione']}','{data['url_immagine']}');"
+    q = f"INSERT INTO opere (titolo,data_pubblicazione) VALUES ('{data['quadro']}','{data['data_pubblicazione']}');"
     execute_query(c,q)
+    q2 = f"SELECT id_artista FROM artisti WHERE nome = '{data['autore']}';"
+    id_artista = read_query(c,q2)[0][0]
+    q3 = "SELECT id_opera FROM opere ORDER BY id_opera DESC LIMIT 1;"
+    id_opera = read_query(c, q3)[0][0]
+    q4 = f"INSERT INTO creazione(id_artista, id_opera) VALUES ('{id_artista}', '{id_opera}';"
     c.close()
 #TODO: add creazione
 
