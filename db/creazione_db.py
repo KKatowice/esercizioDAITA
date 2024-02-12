@@ -1,6 +1,6 @@
-from ..dbUtils import *
+from dbUtils import *
 
-connection = create_server_connection(h,id,psw)
+connection = create_server_connection()
 create_database(connection, "CREATE DATABASE museo")
 connection = create_db_connection("museo")
 

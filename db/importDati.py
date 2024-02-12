@@ -28,6 +28,8 @@ def replace_httpDate(value):
 df['artistLabel'] = df['artistLabel'].apply(replace_http)
 df['artistBirthDate'] = df['artistBirthDate'].apply(replace_httpDate)
 df['artistDeathDate']  = df['artistDeathDate'].apply(replace_httpDate)
+print(df.head)
+df['creationDate']  = df['creationDate'].apply(replace_httpDate)
 df.drop_duplicates(subset='artistLabel', inplace=True)
 
 
@@ -53,7 +55,7 @@ for e in df.itertuples():
     a = read_query(connection, f"""SELECT id_artista FROM artisti WHERE nome = "{e[4]}";""")
     if a:
         print(a)
-        lista_creazione.append((a[0][0], c))
+        lista_creazione.append((a[0]['id_artista'], c))
         c +=1
 
 q2 = """INSERT INTO opere (titolo, data_pubblicazione, url_immagine)
