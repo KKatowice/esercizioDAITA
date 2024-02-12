@@ -175,9 +175,14 @@ def getOpereByType():
 def addArtista():
     data = request.get_json()
     c = create_db_connection(dbname)
-    q = f"INSERT INTO artisti (nome,movimento,data_nascita,data_morte) VALUES ('{data['autore']}','{data['movimento']}','{data['data_di_nascita']}','{data['data_di_morte']}');"
-    execute_query(c,q)
-    c.close()
+    try:
+        q = f"INSERT INTO artisti (nome,movimento,data_nascita,data_morte) VALUES ('{data['autore']}','{data['movimento']}','{data['data_di_nascita']}','{data['data_di_morte']}');"
+        execute_query(c,q)
+        return {"res":True}
+    except:
+        return {"res":False}
+    finally:
+        c.close()
 
 
 @apiBlueprint.route('/api/addOpera', methods=['POST'])
@@ -201,29 +206,49 @@ def updateArtista():
     data = request.get_json()
     c = create_db_connection(dbname)
     q = f"UPDATE artisti SET data_nascita = '{data['data_nascita']}', data_morte = '{data['data_morte']}' WHERE nome = '{data['nome']}';"
-    execute_query(c,q)
-    c.close()
+    try:
+        execute_query(c,q)
+        return {"res":True}
+    except:
+        return {"res":False}
+    finally:
+        c.close()
 
 @apiBlueprint.route('/api/updateOpera', methods=['PUT'])
 def updateOpera():
     data = request.get_json()
     c = create_db_connection(dbname)
     q = f"UPDATE opere SET data_pubblicazione = '{data['data_pubblicazione']}', url_immagine = '{data['url_immagine']}' WHERE titolo = '{data['titolo']}';"
-    execute_query(c,q)
-    c.close()
+    try:
+        execute_query(c,q)
+        return {"res":True}
+    except:
+        return {"res":False}
+    finally:
+        c.close()
 
 @apiBlueprint.route('/api/deleteArtista', methods=['DELETE'])
 def deleteArtista():
     data = request.get_json()
     c = create_db_connection(dbname)
     q = f"DELETE FROM artisti WHERE nome = '{data['nome']}';"
-    execute_query(c,q)
-    c.close()
+    try:
+        execute_query(c,q)
+        return {"res":True}
+    except:
+        return {"res":False}
+    finally:
+        c.close()
 
 @apiBlueprint.route('/api/deleteOpera', methods=['DELETE'])
 def deleteOpera():
     data = request.get_json()
     c = create_db_connection(dbname)
     q = f"DELETE FROM opere WHERE titolo = '{data['titolo']}';"
-    execute_query(c,q)
-    c.close()
+    try:
+        execute_query(c,q)
+        return {"res":True}
+    except:
+        return {"res":False}
+    finally:
+        c.close()

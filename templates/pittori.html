@@ -146,12 +146,13 @@
       <div class="d-flex justify-content-around mb-4 mt-1">
         <a href="/quadri?nome={{ artista['nome'] }}"><button class="btn btn-primary">Vedi opere</button></a>
         <button type="button" class="btn btn-primary" onclick="openPopup('{{ artista['nome'] }}')">Modifica</button>
+
       </div>
     </div>
     
     <!-- Popup -->
     <div id="overlay"></div>
-    <div class="modal " id="modificaPopup"
+    <div class="modal " id="modificaPopup" 
       style=" display: none;width: 25%; height: 35%; justify-content: center; align-items: center;flex-direction: column;">
       <span class="close" onclick="closePopup()">&times;</span>
 
@@ -170,7 +171,7 @@
     </div>
     <!-- Script -->
     <script>
-      function openPopup(nomeArtista) {
+      function openPopup() {
         // Visualizza il popup 
         document.getElementById('modificaPopup').style.display = 'flex';
         document.getElementById('overlay').style.display = 'block'; // Mostra l'overlay
