@@ -48,6 +48,9 @@ def opere():
 def update_delete_artista():
    return render_template('update&delete_artistaLeo.html')
 
+@app.route('/update&delete_opereLeo')
+def update_delete_opere():
+   return render_template('update&delete_opereLeo.html')
 
 if __name__ == '__main__':
    app.run(debug=True) 
