@@ -20,7 +20,7 @@ creazione = """CREATE TABLE creazione(
                 id_artista int NOT NULL,
                 id_opera int NOT NULL,
                 FOREIGN KEY (id_artista) REFERENCES artisti(id_artista) ON DELETE CASCADE ON UPDATE CASCADE,
-                FOREIGN KEY (id_opera) opere(id_opera) REFERENCES ON DELETE CASCADE ON UPDATE CASCADE);"""
+                FOREIGN KEY (id_opera) REFERENCES opere(id_opera) ON DELETE CASCADE ON UPDATE CASCADE);"""
 
 execute_query(connection, artisti)
 execute_query(connection, opere)
