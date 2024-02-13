@@ -103,14 +103,14 @@
     </div>
   </div>
 </nav>
-    <div class="container mt-5">
+    
         <h1>Tutti i quadri</h1>
 
             <div class="row mr-4 ml-4">
             {% for opera in opere %}
 
-                <div class="col-lg-3 col-md-4 col-sm-6 ">
-                <div class="card mt-3" style="width: 18rem;">
+                <div class="col-lg-4 col-md-4 col-sm-6 d-flex justify-content-center mb-2">
+                <div class="card mt-3 " style="width: 20rem;">
                   <img class="card-img-top" src="{{ opera['url_immagine'] }}">
                   <div class="card-body">
                     <h5 class="card-title">{{ opera['titolo'] }}</h5>
@@ -119,9 +119,7 @@
                     <li class="list-group-item">{{ opera['data_pubblicazione'] }}</li>
                   </ul>
                   <div class="card-body">
-                    <div class="d-flex justify-content-around mb-4 mt-1">
                       <button type="button" class="btn btn-primary" onclick="openPopup('{{ opera['titolo'] }}', '{{ loop.index }}')">Modifica </button>
-                    </div>
                   </div>
                 </div>
                 </div>
@@ -147,7 +145,7 @@
               </div>
             {% endfor %}
             </div>
-    </div>
+    
     <!-- Includi Bootstrap JS (opzionale) -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
     <script>
@@ -218,21 +216,23 @@
         }); */
     </script>
 
-<div class="pagination">
+<nav aria-label="Page navigation example">
+    <ul class="pagination">
     {% if page > 1 %}
-        <a href="{{ url_for('opere', page=page-1) }}">Previous</a>
+        <li class="page-item"><a class="page-link" href="{{ url_for('opere', page=page-1) }}">Previous</a></li>
     {% endif %}
     {% for num in range(1, total_pages + 1) %}
         {% if num == page %}
-            <strong>{{ num }}</strong>
+            <li class="page-item"><a class="page-link" href="#"><strong>{{ num }}</strong></a></li>
         {% else %}
-            <a href="{{ url_for('opere', page=num) }}">{{ num }}</a>
+            <li class="page-item"><a class="page-link" href="{{ url_for('opere', page=num) }}">{{ num }}</a></li>
         {% endif %}
     {% endfor %}
     {% if page < total_pages %}
-        <a href="{{ url_for('opere', page=page+1) }}">Next</a>
+        <li class="page-item"><a class="page-link" href="{{ url_for('opere', page=page+1) }}">Next</a></li>
     {% endif %}
-</div>
+    </ul>
+</nav>
 
 </body>
 </html>
