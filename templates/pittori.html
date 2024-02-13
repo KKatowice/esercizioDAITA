@@ -193,7 +193,7 @@
 
   function deleteArtist(art){
     
-    let res = fetch('/pittori', {
+    let res = fetch('/api/deleteArtista', {
       method: 'DELETE',
       headers: {
         'Content-Type': 'application/json'
@@ -222,7 +222,7 @@
         additionalInfo: additionalInfo
     };
     console.log(artistData)
-    let res = fetch('/pittori', {
+    let res = fetch('/api/updateArtista', {
       method: 'PUT',
       headers: {
         'Content-Type': 'application/json'
