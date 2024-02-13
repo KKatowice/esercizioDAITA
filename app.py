@@ -12,6 +12,7 @@ def home():
 def artisti():
    page = int(request.args.get('page', default=1))
    items_per_page = 20
+   print(dbname, "dbname in api???")
    c = create_db_connection(dbname)
    query = "SELECT COUNT(*) AS num_artisti FROM artisti"
    conteggio = read_query(c, query)[0]['num_artisti']

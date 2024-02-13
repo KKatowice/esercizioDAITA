@@ -12,12 +12,10 @@ def create_server_connection():
     connection = None
     try:
         connection = mysql.connector.connect(
-            #host=h,
-            #user=id,
-            #passwd=h
-            host="localhost",
-            user="corsoUser",
-            passwd="asdasd"
+            host=h,
+            user=id,
+            passwd=h
+            
         )
         print("MySQL Database connection successful")
     except Error as err:
