@@ -6,6 +6,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Museo/pittori</title>
   <!-- Includi Bootstrap CSS -->
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
   <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
   <style>
     body {
@@ -189,7 +190,9 @@
     </ul>
   </nav>
 <!-- Script -->
+<script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script> 
 <script>
+  var notyf = new Notyf();
 
   function deleteArtist(art){
     
@@ -203,9 +206,11 @@
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data);
+        notyf.success("Cancellato con successo");
     })
     .catch((error) => {
         console.error('Error:', error);
+        notyf.error(`Errore: ${error}`);
     });
 
   }
@@ -232,9 +237,11 @@
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data);
+        notyf.success("Modificato con successo");
     })
     .catch((error) => {
         console.error('Error:', error);
+        notyf.error(`Errore: ${error}`);
     });
 
   }

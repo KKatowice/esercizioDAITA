@@ -4,6 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Museo/quadri</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <!-- Includi Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
     <style>
@@ -148,7 +149,9 @@
     
     <!-- Includi Bootstrap JS (opzionale) -->
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script> 
     <script>
+      var notyf = new Notyf();
 
       function deleteOpera(art){
         
@@ -162,8 +165,10 @@
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
+            notyf.success("Cancellata con successo");
         })
         .catch((error) => {
+            notyf.error(`Errore: ${error}`);
             console.error('Error:', error);
         });
     
@@ -190,10 +195,12 @@
         })
         .then(response => response.json())
         .then(data => {
+            notyf.success("Modificata con successo");
             console.log('Success:', data);
         })
         .catch((error) => {
             console.error('Error:', error);
+            notyf.error(`Errore: ${error}`);
         });
     
       }
@@ -216,6 +223,7 @@
           }
         }); */
     </script>
+    
 
 <nav aria-label="Page navigation example">
     <ul class="pagination">

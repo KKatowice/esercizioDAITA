@@ -6,6 +6,7 @@
     <title>Home Page</title>
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.css">
     <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> <!-- Aggiunto Font Awesome per le icone -->
     <style>
         body {
@@ -140,7 +141,9 @@
             </div>
         </div>
     </div>
+    <script src="https://cdn.jsdelivr.net/npm/notyf@3/notyf.min.js"></script> 
     <script>
+    var notyf = new Notyf();
     function creaDB(){
     
         let res = fetch('/api/createDB', {
@@ -153,9 +156,11 @@
         .then(response => response.json())
         .then(data => {
             console.log('Success:', data);
+            notyf.success("Creato con successo");
         })
         .catch((error) => {
             console.error('Error:', error);
+            notyf.error(`Errore: ${error}`);
         });
     }
 
@@ -171,9 +176,11 @@
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data);
+        notyf.success("Cancellato con successo");
     })
     .catch((error) => {
         console.error('Error:', error);
+        notyf.error(`Errore: ${error}`);
     });
 }
 
@@ -189,9 +196,11 @@ function insertData(){
     .then(response => response.json())
     .then(data => {
         console.log('Success:', data);
+        notyf.success("Dati inseriti con successo");
     })
     .catch((error) => {
         console.error('Error:', error);
+        notyf.error(`Errore: ${error}`);
     });
 }
     </script>
