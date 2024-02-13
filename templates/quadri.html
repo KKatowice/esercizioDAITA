@@ -157,7 +157,7 @@
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({'nome': art})
+          body: JSON.stringify({'titolo': art})
         })
         .then(response => response.json())
         .then(data => {
@@ -185,7 +185,7 @@
           headers: {
             'Content-Type': 'application/json'
           },
-          body: JSON.stringify({'nome': art})
+          body: JSON.stringify(artistData)
         })
         .then(response => response.json())
         .then(data => {

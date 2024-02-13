@@ -37,7 +37,7 @@ def opere():
    if n:
       if isinstance(n, str):
          opere = getOpereByArtist(n)
-         print(opere)
+         #print(opere)
       else:
          raise TypeError("Il nome deve essere una stringa")
    else:
