@@ -140,7 +140,7 @@
                   <input value="{{ opera['url_immagine'] }}">
 
                    </div>
-                <button onclick="updateOpera(this)" class="btn btn-primary" style="background-color:blue; color: white; width: 50%;">Conferma</button>
+                <button onclick="updateOpera(this,'{{ opera['titolo'] }}')" class="btn btn-primary" style="background-color:blue; color: white; width: 50%;">Conferma</button>
                 <button onclick="deleteOpera('{{ opera['titolo'] }}')" class="btn btn-primary" style="background-color:red; width: 60%;margin-top:1%">Cancella Opera</button>
               </div>
             {% endfor %}
@@ -168,7 +168,7 @@
         });
     
       }
-      function updateOpera(buttonElement){
+      function updateOpera(buttonElement, origName){
         var modal = buttonElement.closest('.modal');
         var inputs = modal.querySelectorAll('input');
         var nome = inputs[0].value;
@@ -177,9 +177,10 @@
         var artistData = {
             titolo: nome,
             data_pubblicazione: dataPub,
-            url_immagine: url
+            url_immagine: url,
+            originalName: origName
         };
-        console.log(artistData)
+        console.log("art dataaa",artistData)
         let res = fetch('/api/updateOpera', {
           method: 'PUT',
           headers: {

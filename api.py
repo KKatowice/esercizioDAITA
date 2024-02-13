@@ -226,7 +226,8 @@ def updateArtista():
 def updateOpera():
     data = request.get_json()
     c = create_db_connection(dbname)
-    q = f"UPDATE opere SET data_pubblicazione = '{data['data_pubblicazione']}', url_immagine = '{data['url_immagine']}' WHERE titolo = '{data['titolo']}';"
+    print("data?????????",data)
+    q = f"UPDATE opere SET titolo='{data['titolo']}', data_pubblicazione = '{data['data_pubblicazione']}', url_immagine = '{data['url_immagine']}' WHERE titolo = '{data['originalName']}';"
     r = execute_query(c,q)
     c.close()
     if r:
