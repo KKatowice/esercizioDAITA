@@ -11,7 +11,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <style>
-        /* Stili CSS qui */
+
         body {
             background-color: #F0F4F8;
             color: #333;
@@ -105,6 +105,49 @@
             <button onclick="inviaDatiJSONartista()">Aggiorna dati artista</button>
         </div>
     </div>
+<script>
+    function inviaDatiJSONautore() {
+        // Ottieni i dati dal form
+        var nomeArtista = document.getElementById('autore').value;
+
+        // Costruisci l'oggetto JSON
+        var datiJSON = {
+            nome: nome
+        };
+
+        // Esegui la richiesta POST con i dati JSON
+        fetch('/api/deleteArtista', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(datiJSON)
+        });
+    }
+
+    function inviaDatiJSONartista() {
+        // Ottieni i dati dal form
+        var nomeArtista = document.getElementById('nome_artista').value;
+        var dataNascita = document.getElementById('data_nascita').value;
+        var dataMorte = document.getElementById('data_morte').value;
+
+        // Costruisci l'oggetto JSON
+        var datiJSON = {
+            nome: nomeArtista,
+            data_nascita: dataNascita,
+            data_morte: dataMorte
+        };
+
+        // Esegui la richiesta POST con i dati JSON
+        fetch('/api/updateArtista', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(datiJSON)
+        });
+    }
+</script>
 
     <script>
         // Inizializzazione del Datepicker per la data di nascita
@@ -130,6 +173,8 @@
                 maxDate: new Date(2024, 11, 31)
             });
         });
+
+
     </script>
 </body>
 </html>

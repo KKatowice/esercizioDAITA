@@ -4,7 +4,12 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Invio Dati</title>
-     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <!-- Includi jQuery -->
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <!-- Includi jQuery UI -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
     <style>
         body {
             background-color: #F0F4F8;
@@ -27,7 +32,7 @@
         .container {
             margin-top: 50px;
         }
-        h1 {
+        h2 {
             color: #3D84A8;
             text-align: center;
             margin-bottom: 30px;
@@ -46,7 +51,7 @@
     </style>
 </head>
 <body>
-    <h2>elimina opera</h2>
+    <h2>Elimina opera</h2>
     <form action='/api/deleteOpera' method="post">
         <label for="autore">Nome opera da eliminare</label>
         <input type="text" id="autore" name="nome"><br><br>
@@ -60,34 +65,47 @@
         <label for="immagine">immagine</label>
         <input type="text" id="immagine" name="nome"><br><br>
         <label for="data_pubbl">data di pubblicazione</label>
-        <input type="date" id="data_pubbl" name="nome"><br><br>
+        <!-- Input per la selezione della data di pubblicazione -->
+        <input type="text" id="data_pubbl" name="data_pubbl"><br><br>
     </form>
     <button onclick="inviaDatiJSONopera()">aggiorna dati opera</button>
+<script>
+    function inviaDatiJSONopera() { // Cambia il nome della funzione
+    // Ottieni i dati dal form
+    var nomeOpera = document.getElementById('nome_quadro').value; // Cambia il nome della variabile
+    var immagine = document.getElementById('immagine').value; // Cambia il nome della variabile
+    var dataPubblicazione = document.getElementById('data_pubbl').value; // Cambia il nome della variabile
 
-    <script>
+    // Costruisci l'oggetto JSON
+    var datiJSON = {
+        nome: nomeOpera,
+        immagine: immagine, // Usa il nome corretto
+        data_pubbl: dataPubblicazione // Usa il nome corretto
+    };
 
-    function cancellaDatiJSONopera() {
-        // Ottieni il nome dell'opera da cancellare
-        var nome_opera = document.getElementById('nome_opera').value;
-
-        // Esegui la richiesta DELETE all'endpoint appropriato
-        fetch('/api/deleteOpera/' + nome_opera, {
-            method: 'DELETE'
-        });
-    }
-    function aggiornaDatiJSONopera() {
-    // Ottieni il nome dell'opera da aggiornare
-    var nome_opera = document.getElementById('nome_opera').value;
-    var immagine = document.getElementById('immagine').value;
-    var data_pubbl = document.getElementById('data_pubbl').value;
-
-    // Esegui la richiesta PUT all'endpoint appropriato
-    fetch('/api/updateOpera' + nome_opera, {
-        method: 'PUT'
+    // Esegui la richiesta POST con i dati JSON
+    fetch('/api/updateOpera', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        body: JSON.stringify(datiJSON)
     });
 }
 
 </script>
-
+    <script>
+        // Inizializzazione del Datepicker per la data di pubblicazione
+        $(function() {
+            $("#data_pubbl").datepicker({
+                changeMonth: true,
+                changeYear: true,
+                showButtonPanel: true,
+                dateFormat: 'yy-mm-dd',
+                minDate: new Date(1900, 0, 1),
+                maxDate: new Date(2024, 11, 31)
+            });
+        });
+    </script>
 </body>
 </html>
