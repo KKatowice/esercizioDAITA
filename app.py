@@ -3,6 +3,7 @@ from api import *
 app = Flask(__name__)
 app.register_blueprint(apiBlueprint)
 
+
 @app.route('/')
 def home():
    return render_template('home.html')
@@ -18,14 +19,23 @@ def aggiungiArtista():
 
 @app.route('/quadri')
 def opere():
-   n = str(request.args.get("nome"))
+   page = int(request.args.get('page', default=1))
+   items_per_page = 20
+   c = create_db_connection(dbname)
+   query = "SELECT COUNT(*) AS num_opere FROM opere"
+   conteggio = read_query(c,query)[0]['num_opere']
+   totale = (conteggio // items_per_page) + 1
+   n = request.args.get("nome", default=None)
    print(n, type(n))
    print("vivo ")
    if n:
-      opere = getOpereByArtist(n)
+      if isinstance(n, str):
+         opere = getOpereByArtist(n)
+      else:
+         raise TypeError("Il nome deve essere una stringa")
    else:
       opere = getWorks()
-   return render_template('quadri.html', opere=opere)
+   return render_template('quadri.html', opere=opere, page=page, total_pages=totale)
 
 
 if __name__ == '__main__':

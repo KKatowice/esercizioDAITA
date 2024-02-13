@@ -21,23 +21,28 @@ TABELLE:
 from flask import Blueprint,request #nome db: museo
 from dbUtils import *
 
+
 apiBlueprint = Blueprint("apiBlueprint",__name__)
 dbname = 'museo'
 
 #--OPERE--
 @apiBlueprint.route('/api/getOpere', methods=['GET'])
 def getWorks():
-    l = request.args.get("limit", default="20")
-    if type(l) != int:
-        try:
-            l = int(l)
-        except:
-            raise ValueError("Limit must be an integer")
+    # l = request.args.get("limit", default="20")
+    # if type(l) != int:
+    #     try:
+    #         l = int(l)
+    #     except:
+    #         raise ValueError("Limit must be an integer")
+    page = int(request.args.get('page', default=1))
+    items_per_page = 20
+    offset = (page - 1) * items_per_page
     c = create_db_connection(dbname)
-    q = f"SELECT * FROM opere LIMIT {l};"
+    q = f"SELECT * FROM opere LIMIT {items_per_page} OFFSET {offset};"
     res = read_query(c,q)
     c.close()
     return res
+
 
 @apiBlueprint.route('/api/getOpereByArtist', methods=['GET'])
 def getOpereByArtist(n):
