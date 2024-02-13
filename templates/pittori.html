@@ -165,7 +165,7 @@
         Data morte
         <input value="{{ artista['data_morte'] }}" placeholder="{{ artista['data_morte'] }}">
       </div>
-      <button onclick="updateArtist(this)" class="btn btn-primary" style="background-color:blue; color: white; width: 50%;">Conferma</button>
+      <button onclick="updateArtist(this, '{{ artista['nome'] }}')" class="btn btn-primary" style="background-color:blue; color: white; width: 50%;">Conferma</button>
       <button onclick="deleteArtist('{{ artista['nome'] }}')" class="btn btn-primary" style="background-color:red; width: 60%;margin-top:1%">Cancella Artista</button>
     </div>
 {% endfor %}
@@ -209,7 +209,7 @@
     });
 
   }
-  function updateArtist(buttonElement){
+  function updateArtist(buttonElement,nmeOr){
     var modal = buttonElement.closest('.modal');
     var inputs = modal.querySelectorAll('input');
     var nome = inputs[0].value;
@@ -219,7 +219,7 @@
         nome: nome,
         data_nascita: dataNascita,
         data_morte: dataMorte,
-        additionalInfo: additionalInfo
+        nome_orig: nmeOr
     };
     console.log(artistData)
     let res = fetch('/api/updateArtista', {
@@ -227,7 +227,7 @@
       headers: {
         'Content-Type': 'application/json'
       },
-      body: JSON.stringify({'nome': art})
+      body: JSON.stringify(artistData)
     })
     .then(response => response.json())
     .then(data => {
