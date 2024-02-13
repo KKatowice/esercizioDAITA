@@ -10,11 +10,8 @@
             background-color: #F0F4F8;
             color: #333;
             font-family: Arial, sans-serif;
-            margin: auto;
-            width: 50%;
-            border: 3px solid green;
-            padding: 10px;
-
+            margin: 0;
+            padding: 0;
         }
         .navbar {
             background-color: #3D84A8;
@@ -46,11 +43,14 @@
         .btn-custom:hover {
             background-color: #4682b4;
         }
+        .right {
+            float:right:
+        }
     </style>
 </head>
 <body>
     <h2>Inserisci i dati dell'autore</h2>
-    <form action='/api/addArtista' method="post">
+    <form action="/add/data/opera&autore" method="post">
         <label for="autore">Nome autore:</label>
         <input type="text" id="autore" name="nome"><br><br>
         <label for="data_di_nascita">Data di nascita:</label>
@@ -61,14 +61,18 @@
         <input type="text" id="movimento" name="nome"><br><br>
     </form>
     <button onclick="inviaDatiJSONautore()">Invia dati JSON autore</button>
+
     <h2>Inserisci i dati dell'opera</h2>
-    <form action='/api/addOpera' method="post">
+
+    <form action="/add/data/opera&autore" method="post">
         <label for="nome_quadro">Nome quadro:</label>
         <input type="text" id="nome_quadro" name="nome"><br><br>
+
         <label for="Data_pubblicazione">Data realizzazione:</label>
         <input type="date" id="Data_pubblicazione" name="nome"><br><br>
+
         <label for="nome_autore">Nome autore:</label>
-        <input type="date" id="nome_autore" name="nome"><br><br>
+        <input type="text" id="nome_autore" name="nome"><br><br>
 
 
     </form>
