@@ -44,6 +44,10 @@ def opere():
       opere = getWorks()
    return render_template('quadri.html', opere=opere, page=page, total_pages=totale)
 
+@app.route('/update&delete_artistaLeo')
+def update_delete_artista():
+   return render_template('update&delete_artistaLeo.html')
+
 
 if __name__ == '__main__':
    app.run(debug=True) 
