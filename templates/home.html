@@ -6,13 +6,13 @@
     <title>Home Page</title>
 
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" rel="stylesheet"> <!-- Aggiunto Font Awesome per le icone -->
     <style>
         body {
-            background-color: #F0F4F8;
-            color: #333;
             font-family: Arial, sans-serif;
             margin: 0;
             padding: 0;
+            background-color: #F0F4F8;
         }
         .navbar {
             background-color: #3D84A8;
@@ -26,7 +26,7 @@
             font-weight: bold;
         }
         .container {
-            margin-top: 50px;
+            margin-top: 30px;
         }
         h1 {
             color: #3D84A8;
@@ -40,9 +40,23 @@
             border-radius: 15px;
             padding: 8px 16px;
             transition: background-color 0.3s ease;
+            margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none; /* Rimuove il sottolineato */
         }
         .btn-custom:hover {
             background-color: #4682b4;
+        }
+        .icon {
+            margin-right: 8px; /* Margine a destra per separare l'icona dal testo */
+        }
+        .museum-image {
+            max-width: 100%;
+            height: auto;
+            border-radius: 15px;
+            margin-bottom: 20px;
         }
     </style>
 </head>
@@ -62,7 +76,13 @@
                         <a class="nav-link" href="/quadri">Quadri</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="http://localhost:63342/pythonProject2/esercizioDAITA/templates/aggiungi%20pittore.html?_ijt=sfi8quu0eb67ece7u9khjcjta5&_ij_reload=RELOAD_ON_SAVE">Aggiungi Pittore</a>
+                        <a class="nav-link" href="/aggiungi_pittore_opera">Aggiungi Pittore</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:63342/esercizioDAITA/templates/update&delete_opereLeo.html?_ijt=sgqjggohgd1h9lth562pf825c7&_ij_reload=RELOAD_ON_SAVE">Update/Delete Opera</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="http://localhost:63342/esercizioDAITA/templates/update&delete_artistaLeo.html?_ijt=sgqjggohgd1h9lth562pf825c7&_ij_reload=RELOAD_ON_SAVE">Update/Delete Artista</a>
                     </li>
                 </ul>
             </div>
@@ -70,19 +90,37 @@
     </nav>
 
     <div class="container">
+        <img src="https://images.pexels.com/photos/1839919/pexels-photo-1839919.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="Museum Exhibition" class="img-fluid museum-image">
+
         <h1>Benvenuti al Museo</h1>
         <div class="row">
             <div class="col-md-6">
-                <a href="/pittori" class="btn btn-custom btn-block">Mostra Artisti</a>
+                <a href="/pittori" class="btn btn-custom btn-block">
+                    <i class="fas fa-users icon"></i> Mostra Artisti
+                </a>
             </div>
             <div class="col-md-6">
-                <a href="/quadri" class="btn btn-custom btn-block">Mostra Quadri</a>
+                <a href="/quadri" class="btn btn-custom btn-block">
+                    <i class="fas fa-image icon"></i> Mostra Quadri
+                </a>
             </div>
         </div>
 
         <div class="row mt-4">
             <div class="col-md-6">
-                <a href="/aggiungi_pittore_opera" class="btn btn-custom btn-block">Aggiungi Pittore</a>
+                <a href="/aggiungi_pittore_opera" class="btn btn-custom btn-block">
+                    <i class="fas fa-palette icon"></i> Aggiungi Pittore
+                </a>
+            </div>
+            <div class="col-md-6 mt-2">
+                <a href="http://localhost:63342/esercizioDAITA/templates/update&delete_opereLeo.html?_ijt=sgqjggohgd1h9lth562pf825c7&_ij_reload=RELOAD_ON_SAVE" class="btn btn-custom btn-block">
+                    <i class="fas fa-edit icon"></i> Update/Delete Opera
+                </a>
+            </div>
+            <div class="col-md-6 mt-2">
+                <a href="http://localhost:63342/esercizioDAITA/templates/update&delete_artistaLeo.html?_ijt=sgqjggohgd1h9lth562pf825c7&_ij_reload=RELOAD_ON_SAVE" class="btn btn-custom btn-block">
+                    <i class="fas fa-user-edit icon"></i> Update/Delete Artista
+                </a>
             </div>
         </div>
     </div>
