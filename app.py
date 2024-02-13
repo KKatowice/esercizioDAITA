@@ -10,8 +10,14 @@ def home():
 
 @app.route('/pittori')
 def artisti():
+   page = int(request.args.get('page', default=1))
+   items_per_page = 20
+   c = create_db_connection(dbname)
+   query = "SELECT COUNT(*) AS num_artisti FROM artisti"
+   conteggio = read_query(c, query)[0]['num_artisti']
+   totale = (conteggio // items_per_page) + 1
    artisti = getArtisti()
-   return render_template('pittori.html', artisti= artisti)
+   return render_template('pittori.html', artisti=artisti, page=page, total_pages=totale)
 
 @app.route('/aggiungi_pittore_opera')
 def aggiungiArtista():
