@@ -55,9 +55,10 @@ def getOpereByArtist(n):
     #q = f"SELECT * FROM artisti WHERE autore = '{n}';" #join creazione
     q = f"""
     SELECT * FROM opere JOIN creazione JOIN artisti 
-    ON artisti.id_artista = creazione.id_artista AND creazione.id_opera = opere.id_opera
+    ON artisti.id_artista = creazione.id_artista
     WHERE nome = '{n}';"""
     res = read_query(c,q)
+    print("in api",res)
     c.close()
     return res
     
