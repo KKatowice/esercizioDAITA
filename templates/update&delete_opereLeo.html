@@ -70,28 +70,39 @@
     </form>
     <button onclick="inviaDatiJSONopera()">aggiorna dati opera</button>
 <script>
-    function inviaDatiJSONopera() { // Cambia il nome della funzione
-    // Ottieni i dati dal form
-    var nomeOpera = document.getElementById('nome_quadro').value; // Cambia il nome della variabile
-    var immagine = document.getElementById('immagine').value; // Cambia il nome della variabile
-    var dataPubblicazione = document.getElementById('data_pubbl').value; // Cambia il nome della variabile
+    function inviaDatiJSONopera() {
+            // Ottieni i dati dal form
+            var nomeOpera = document.getElementById('nome_quadro').value;
+            var immagine = document.getElementById('immagine').value;
+            var dataPubblicazione = document.getElementById('data_pubbl').value;
 
-    // Costruisci l'oggetto JSON
-    var datiJSON = {
-        nome: nomeOpera,
-        immagine: immagine, // Usa il nome corretto
-        data_pubbl: dataPubblicazione // Usa il nome corretto
-    };
+            // Costruisci l'oggetto JSON
+            var datiJSON = {
+                nome: nomeOpera,
+                immagine: immagine,
+                data_pubblicazione: dataPubblicazione
+            };
 
-    // Esegui la richiesta POST con i dati JSON
-    fetch('/api/updateOpera', {
-        method: 'POST',
-        headers: {
-            'Content-Type': 'application/json'
-        },
-        body: JSON.stringify(datiJSON)
-    });
-}
+            // Esegui la richiesta DELETE con i dati JSON per l'eliminazione dell'opera
+            fetch('/api/deleteOpera', {
+                method: 'DELETE',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datiJSON)
+            });
+
+            // Esegui la richiesta POST con i dati JSON per l'aggiornamento dell'opera
+            fetch('/api/updateOpera', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(datiJSON)
+            });
+        }
+    </script>
+
 
 </script>
     <script>
