@@ -20,6 +20,7 @@ TABELLE:
 
 from flask import Blueprint,request #nome db: museo
 from dbUtils import *
+from importDati import mainInsert
 
 
 apiBlueprint = Blueprint("apiBlueprint",__name__)
@@ -184,14 +185,13 @@ def getOpereByType():
 def addArtista():
     data = request.get_json()
     c = create_db_connection(dbname)
-    try:
-        q = f"INSERT INTO artisti (nome,movimento,data_nascita,data_morte) VALUES ('{data['autore']}','{data['movimento']}','{data['data_di_nascita']}','{data['data_di_morte']}');"
-        execute_query(c,q)
+    q = f"INSERT INTO artisti (nome,movimento,data_nascita,data_morte) VALUES ('{data['autore']}','{data['movimento']}','{data['data_di_nascita']}','{data['data_di_morte']}');"
+    r = execute_query(c,q)
+    c.close()
+    if r:
         return {"res":True}
-    except:
+    else:
         return {"res":False}
-    finally:
-        c.close()
 
 
 @apiBlueprint.route('/api/addOpera', methods=['POST'])
@@ -205,8 +205,12 @@ def addOpera():
     q3 = "SELECT id_opera FROM opere ORDER BY id_opera DESC LIMIT 1;"
     id_opera = read_query(c, q3)[0][0]
     q4 = f"INSERT INTO creazione(id_artista, id_opera) VALUES ('{id_artista}', '{id_opera}';"
-    execute_query(c, q4)
+    r = execute_query(c,q4)
     c.close()
+    if r:
+        return {"res":True}
+    else:
+        return {"res":False}
 #TODO: add creazione
 
 
@@ -262,5 +266,52 @@ def deleteOpera():
         return {"res":True}
     else:
         return {"res":False}
+    
+
+#--CREAZIONE DB--
+@apiBlueprint.route('/api/createDB', methods=['POST'])
+def createDB():
+    connection = create_server_connection()
+    create_database(connection, "CREATE DATABASE museo")
+    connection = create_db_connection("museo")
+
+    artisti = """CREATE TABLE artisti(
+                id_artista int PRIMARY KEY AUTO_INCREMENT,
+                nome varchar(255) UNIQUE NOT NULL,
+                movimento varchar(255),
+                data_nascita datetime,
+                data_morte datetime);"""
+    opere = """CREATE TABLE opere(
+                id_opera int PRIMARY KEY AUTO_INCREMENT,
+                titolo varchar(255) NOT NULL,
+                data_pubblicazione datetime,
+                url_immagine varchar(255));"""
+    creazione = """CREATE TABLE creazione(
+                    id int PRIMARY KEY AUTO_INCREMENT,
+                    id_artista int NOT NULL,
+                    id_opera int NOT NULL,
+                    FOREIGN KEY (id_artista) REFERENCES artisti(id_artista) ON DELETE CASCADE ON UPDATE CASCADE,
+                    FOREIGN KEY (id_opera) REFERENCES opere(id_opera) ON DELETE CASCADE ON UPDATE CASCADE);"""
+
+    execute_query(connection, artisti)
+    execute_query(connection, opere)
+    execute_query(connection, creazione)
+
+    connection.close()
+    return {"todo:":"implementare"}
+
+@apiBlueprint.route('/api/dropDB', methods=['DELETE'])
+def dropDB():
+    connection = create_server_connection()
+    q = "DROP DATABASE museo;"
+    execute_query(connection, q)
+    connection.close()
+    return {"todo:":"implementare"}
+
+@apiBlueprint.route('/api/fillDb', methods=['POST'])
+def fillDb():
+    mainInsert()
+    return {"todo:":"implementare"}
+    
         
     

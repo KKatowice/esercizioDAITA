@@ -8,13 +8,16 @@ id = os.getenv('ID')
 psw = os.getenv('PSW')
 h = os.getenv('H')
 
-def create_server_connection(host_name, user_name, user_password):
+def create_server_connection():
     connection = None
     try:
         connection = mysql.connector.connect(
-            host=h,
-            user=id,
-            passwd=h
+            #host=h,
+            #user=id,
+            #passwd=h
+            host="localhost",
+            user="corsoUser",
+            passwd="asdasd"
         )
         print("MySQL Database connection successful")
     except Error as err:

@@ -122,9 +122,79 @@
                     <i class="fas fa-user-edit icon"></i> Update/Delete Artista
                 </a>
             </div>
+            <h1>TEST</h1>
+            <div class="col-md-6 mt-2">
+                <a onclick="creaDB()" style="background-color: rgb(97, 161, 0);" class="btn btn-custom btn-block">
+                    <i class="fas fa-user-edit icon"></i> Crea DB
+                </a>
+            </div>
+            <div class="col-md-6 mt-2">
+                <a onclick="insertData()" style="background-color: rgb(141, 209, 39);" class="btn btn-custom btn-block">
+                    <i class="fas fa-user-edit icon"></i> Inserisci Dati
+                </a>
+            </div>
+            <div class="col-md-6 mt-2">
+                <a onclick="droppaDB()" style="background-color: red;" class="btn btn-custom btn-block">
+                    <i class="fas fa-user-edit icon"></i> Delete DB
+                </a>
+            </div>
         </div>
     </div>
+    <script>
+    function creaDB(){
+    
+        let res = fetch('/api/createDB', {
+        method: 'POST',
+        headers: {
+            'Content-Type': 'application/json'
+        },
+        //body: JSON.stringify({})
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Success:', data);
+        })
+        .catch((error) => {
+            console.error('Error:', error);
+        });
+    }
 
+    function droppaDB(){
+    
+    let res = fetch('/api/dropDB', {
+    method: 'DELETE',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    //body: JSON.stringify({})
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+
+function insertData(){
+    
+    let res = fetch('/api/fillDb', {
+    method: 'POST',
+    headers: {
+        'Content-Type': 'application/json'
+    },
+    //body: JSON.stringify({})
+    })
+    .then(response => response.json())
+    .then(data => {
+        console.log('Success:', data);
+    })
+    .catch((error) => {
+        console.error('Error:', error);
+    });
+}
+    </script>
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
