@@ -112,12 +112,12 @@
 
         // Costruisci l'oggetto JSON
         var datiJSON = {
-            nome: nome
+            nome: nomeArtista
         };
 
         // Esegui la richiesta POST con i dati JSON
         fetch('/api/deleteArtista', {
-            method: 'POST',
+            method: 'DELETE',
             headers: {
                 'Content-Type': 'application/json'
             },
