@@ -24,7 +24,7 @@ from importDati import mainInsert
 
 
 apiBlueprint = Blueprint("apiBlueprint",__name__)
-dbname = 'museo'
+dbname = "museo"
 
 #--OPERE--
 @apiBlueprint.route('/api/getOpere', methods=['GET'])
